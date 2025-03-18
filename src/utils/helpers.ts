@@ -1,5 +1,6 @@
 import {
   FormProps,
+  MusicProps,
   PlaylistFormProps,
   PlaylistProps,
   ResponseProps,
@@ -172,13 +173,15 @@ export const handleSearchMusic = async (
     };
   }
 };
-export const addToPlaylist = (name, data) => {
+export const addToPlaylist = (name: string, data: MusicProps) => {
   const userEmail: string = localStorage.authData
     ? JSON.parse(localStorage.authData)?.email
     : "";
   const userPlaylist = getUserPlaylist(userEmail);
-  const songList = userPlaylist?.find((o) => o.name === name)?.details;
-  const isExist = songList?.some((o) => o.id === data?.id);
+  const songList = userPlaylist?.find(
+    (o: PlaylistFormProps) => o.name === name
+  )?.details;
+  const isExist = songList?.some((o: MusicProps) => o.id === data?.id);
   if (isExist) {
     return {
       status: 204,
@@ -186,7 +189,9 @@ export const addToPlaylist = (name, data) => {
     };
   } else {
     songList.push(data);
-    const playlistIndex = userPlaylist?.findIndex((o) => o.name === name);
+    const playlistIndex = userPlaylist?.findIndex(
+      (o: PlaylistFormProps) => o.name === name
+    );
     userPlaylist[playlistIndex].details = songList;
     const allPlaylist = getAllUserPlaylist();
     const fIndex = allPlaylist?.findIndex(

@@ -15,7 +15,7 @@ const Dashboard: FC = () => {
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [isForm, setIsForm] = useState<boolean>(false);
   const [editData, setEditData] = useState<PlaylistFormProps | null>(null);
-  const [songData, setSongData] = useState<MusicProps>();
+  const [songData, setSongData] = useState<MusicProps | undefined>();
   const [commonError, setCommonError] = useState<string>("");
 
   // Remove localstorage data and reset redux state
@@ -31,12 +31,15 @@ const Dashboard: FC = () => {
       const artistNames = data?.artists
         ?.map((artist: { name: string }) => artist.name)
         .join(", ");
+      const imgURL: string | undefined = data?.images
+        ? data?.images?.[0].url
+        : "";
       setSongData({
         id: data?.id || "",
         name: data?.name || "",
         url: data?.external_urls?.spotify || "",
-        images: data?.images[0]?.url || "",
-        artists: artistNames || "",
+        image: imgURL,
+        artist: artistNames || "",
       });
     } else {
       setSongData(undefined);
@@ -45,7 +48,7 @@ const Dashboard: FC = () => {
 
   // Add song in playlist
   const handleAddToPlaylist = (name: string) => {
-    const res = addToPlaylist(name, songData);
+    const res = addToPlaylist(name, songData || {});
     setCommonError("");
     if (res?.status === 200) {
       selectMusic({});

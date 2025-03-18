@@ -14,7 +14,7 @@ export interface ArtistProps {
   name: string;
 }
 export interface ImageProps {
-  url: string;
+  url?: string;
 }
 export interface externalURLProps {
   spotify: string;
@@ -25,8 +25,9 @@ export interface MusicProps {
   url?: string;
   image?: string;
   artists?: ArtistProps[];
+  artist?: string;
   external_urls?: externalURLProps;
-  images?: ImageProps;
+  images?: ImageProps[];
 }
 
 export interface PlaylistProps {

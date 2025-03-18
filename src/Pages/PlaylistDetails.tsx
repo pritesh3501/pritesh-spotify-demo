@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { FC } from "react";
-import { PlaylistFormProps } from "../utils/constant";
+import { MusicProps, PlaylistFormProps } from "../utils/constant";
 
 interface PlaylistDetailsProps {
   playlistDetails: PlaylistFormProps;
-  setPlaylistDetails: () => void;
+  setPlaylistDetails: (data: MusicProps) => void;
 }
 const PlaylistDetails: FC<PlaylistDetailsProps> = ({
   playlistDetails,
@@ -25,7 +25,7 @@ const PlaylistDetails: FC<PlaylistDetailsProps> = ({
       anchor="right"
       open
       onClose={() => {
-        setPlaylistDetails();
+        setPlaylistDetails({});
       }}
     >
       <Box sx={{ width: 300 }}>
@@ -38,7 +38,7 @@ const PlaylistDetails: FC<PlaylistDetailsProps> = ({
         <Divider />
         <List sx={{ height: 300, overflow: "auto" }}>
           {details?.map((elem, index: number) => {
-            const { name, images, artists, url } = elem;
+            const { name, image, artist, url } = elem;
 
             return (
               <React.Fragment key={index}>
@@ -50,14 +50,14 @@ const PlaylistDetails: FC<PlaylistDetailsProps> = ({
                     }}
                   >
                     <Box sx={{ display: "flex" }}>
-                      <img height={50} width={50} src={images} />
+                      <img height={50} width={50} src={image} />
                     </Box>
                     <Box>
                       <Typography variant="body2" fontWeight="bold">
                         {name}
                       </Typography>
                       <Typography variant="caption" fontWeight="normal">
-                        {artists}
+                        {artist}
                       </Typography>
                     </Box>
                   </ListItemButton>

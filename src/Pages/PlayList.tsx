@@ -6,6 +6,7 @@ import menuIcon from "../assets/menu.png";
 import { deletePlayList } from "../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  MusicProps,
   PlaylistFormProps,
   PlaylistProps,
   ReduxProps,
@@ -19,7 +20,7 @@ interface PlayListProps {
 }
 const PlayList: FC<PlayListProps> = ({ setIsForm, setEditData }) => {
   const dispatch = useDispatch();
-  const [playlistDetails, setPlaylistDetails] = useState(null);
+  const [playlistDetails, setPlaylistDetails] = useState<MusicProps>();
   const reduxData = useSelector((state: ReduxProps) => state.global);
   const [sIndex, setSIndex] = useState<number | string>("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
