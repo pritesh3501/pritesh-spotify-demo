@@ -61,7 +61,7 @@ const PlayList: FC<PlayListProps> = ({ setIsForm, setEditData }) => {
 
   return (
     <Grid container spacing={2} sx={{ marginTop: 2 }}>
-      {playlistDetails && (
+      {playlistDetails?.name && (
         <PlaylistDetails
           playlistDetails={playlistDetails}
           setPlaylistDetails={setPlaylistDetails}
